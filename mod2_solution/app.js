@@ -34,7 +34,7 @@
             { name : 'apple', quantity : 5 },
         ];
 
-        // Use service function to expose data to congtroller
+        // Use service function to expose data to controller
         var alreadyBoughtItems = [];
         service.getalreadyBoughtItems = function () {
             return alreadyBoughtItems;
