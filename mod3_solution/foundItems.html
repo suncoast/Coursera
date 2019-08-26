@@ -1,0 +1,16 @@
+
+<div class="loader" ng-if="list.isLoading"></div>
+<div ng-if="!list.isLoading">
+    <ol class="list-group">
+      <li ng-repeat="item in list.items" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+              <h4 class="mb-1">{{ item.name }}</h4>
+              <span class="badge badge-pill badge-primary pull-right">{{ item.short_name }}</span>
+          </div>
+          <p class="mb-1">{{ item.description }}</p>
+        <button class="btn" ng-click="list.onRemove({index: $index});">Don't want this one!</button>
+      </li>
+    </ol>
+  <div ng-if="list.showEmptyWarning()">Nothing found</div>
+</div>
+
