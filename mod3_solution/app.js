@@ -10,12 +10,13 @@
     function NarrowItDownController (MenuSearchService) {
         var ctrl = this;
         ctrl.found = [];
-        ctrl.hasSearched = false;
-        
-        ctrl.getMatchedItems = function(searchTerm) {
-            ctrl.hasSearched = true;            
+        ctrl.shouldShowEmptyWarning = false;
+
+        ctrl.getMatchedItems = function(searchTerm) {  
+            ctrl.shouldShowEmptyWarning = false;        
             if(!searchTerm) {
                 ctrl.found = [];
+                ctrl.shouldShowEmptyWarning = true;
                 console.log("Empty search Term ");
                 return;
             }
@@ -23,6 +24,9 @@
             var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
             promise.then(function (response) {
                 ctrl.found = response;
+                if(!ctrl.found || ctrl.found.length == 0) {
+                    ctrl.shouldShowEmptyWarning = true;
+                }
                 console.log("Returned: " + response.length + " items");
                 ctrl.isLoading = false;
               })
@@ -64,7 +68,6 @@
           scope: {
             items: '<',
             onRemove: '&',
-            hasSearched: '<',
             isLoading: '<'
           },
           controller: FoundItemsDirectiveController,
@@ -76,11 +79,7 @@
       }
 
       function FoundItemsDirectiveController() {
-        var list = this;
-      
-        list.showEmptyWarning = function () {
-            return (!!list.items && list.items.length > 0) || (!list.hasSearched)? false: true;
-        };
+        var list = this;      
       }
 
 })();

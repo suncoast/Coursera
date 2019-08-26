@@ -9,18 +9,21 @@
 <body ng-app="NarrowItDownApp">
    <div class="container" ng-controller="NarrowItDownController as ctrl">
     <h1>Narrow Down Your Chinese Menu Choice</h1>
-
-    <div class="form-group">
-      <input type="text" placeholder="search term" class="form-control" ng-model="searchTerm">
-    </div>
-    <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click="ctrl.getMatchedItems(searchTerm)">Narrow It Down For Me!</button>
-    </div>
+    <form>
+      <div class="form-group">
+        <input type="text" placeholder="search term" class="form-control" ng-model="searchTerm">
+      </div>
+      <div class="form-group narrow-button">
+        <button type="submit" class="btn btn-primary" ng-click="ctrl.getMatchedItems(searchTerm)">Narrow It Down For Me!</button>
+      </div>
+    </form>
     <br/>
     <br/>
     <br/>
     <!-- found-items should be implemented as a component -->
-    <found-items items="ctrl.found" on-remove="ctrl.onRemove(index)" has-searched="ctrl.hasSearched" is-loading="ctrl.isLoading"></found-items>
+    
+    <div ng-if="ctrl.shouldShowEmptyWarning">Nothing found.</div>
+    <found-items items="ctrl.found" on-remove="ctrl.onRemove(index)" is-loading="ctrl.isLoading"></found-items>
   </div>
   <script src="angular.min.js"></script>
   <script src="app.js"></script>

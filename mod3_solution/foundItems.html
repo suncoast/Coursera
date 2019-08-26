@@ -8,9 +8,8 @@
               <span class="badge badge-pill badge-primary pull-right">{{ item.short_name }}</span>
           </div>
           <p class="mb-1">{{ item.description }}</p>
-        <button class="btn" ng-click="list.onRemove({index: $index});">Don't want this one!</button>
+        <button class="btn btn-danger" ng-click="list.onRemove({index: $index});">Don't want this one!</button>
       </li>
     </ol>
-  <div ng-if="list.showEmptyWarning()">Nothing found</div>
 </div>
 
